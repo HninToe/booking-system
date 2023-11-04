@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- Setting up log path and log file name -->
+  <property name="LOG_PATH" value="./logs"/>
+  <property name="LOG_FILE_NAME" value="application_logback"/>
+
+  <!-- Setting up logging pattern for console logging -->
+  <appender name="ConsoleOutput" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger#%method:%line - %msg%n
+      </Pattern>
+    </layout>
+  </appender>
+
+  <!-- Setting the filename and logging pattern for log file -->
+  <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger#%method:%line - %msg%n
+      </Pattern>
+    </encoder>
+
+    <!-- Setting up a rolling policy with rolling done
+      daily and when file size is 10MB-->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/bookingsystem.%d{yyyy-MM-DD}.%i.log
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <!-- Logging at INFO level -->
+  <root level="info">
+    <appender-ref ref="fileAppender"/>
+    <appender-ref ref="ConsoleOutput"/>
+  </root>
+
+  <!-- Logging at TRACE level -->
+  <logger name="org.bookingsystem" level="INFO" additivity="false">
+    <appender-ref ref="fileAppender"/>
+    <appender-ref ref="ConsoleOutput"/>
+  </logger>
+
+</configuration>

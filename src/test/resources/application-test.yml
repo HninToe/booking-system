@@ -1,0 +1,20 @@
+spring:
+  properties:
+    profiles: test
+  datasource:
+    url: jdbc:hsqldb:mem:test;
+    username: sa
+    password:
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
+    initialization-mode: always
+  jpa:
+    database-platform: spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
+  sql:
+    init:
+      enabled: true
+      schema-locations: classpath:datasets\bookingsystem.sql
+
+bookingsystem:
+  system:
+    reset-password:
+      base-url: "http://localhost:8080/"

@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /booking-system
+
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingsystem
+    username: bookingsystem
+    password: bookingsystempass
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  messages:
+    basename: application-messages
+
+bookingsystem:
+  system:
+    reset-password:
+      base-url: "http://localhost:8080/"
